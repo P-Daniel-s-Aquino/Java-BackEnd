@@ -10,13 +10,13 @@
 // y luego notaremos que for podría ser más elegante.
 
 // Para cumplir con necesidades el equipo de desarrollo (Matías, Sabrina) y vos deberán:
-//Variables y Operadores:
-//Creá variables para representar el precio de un producto y la cantidad deseada por el cliente. 
-//Calculá y mostrale en pantalla el costo total.
-//Modificá el precio o la cantidad y verificá el resultado.
-//Entrada y Salida de Datos:
-//Pedile al usuario que ingrese su nombre y la cantidad de productos que quiere comprar.
-//Mostrá un mensaje personalizado con el monto total (asignando un precio fijo por unidad).
+// Variables y Operadores:
+// Creá variables para representar el precio de un producto y la cantidad deseada por el cliente. 
+// Calculá y mostrale en pantalla el costo total.
+// Modificá el precio o la cantidad y verificá el resultado.
+// Entrada y Salida de Datos:
+// Pedile al usuario que ingrese su nombre y la cantidad de productos que quiere comprar.
+// Mostrá un mensaje personalizado con el monto total (asignando un precio fijo por unidad).
 
 // Condicionales:
 // Suponé que si el cliente quiere más de 100 unidades, le ofrecemos un descuento.
