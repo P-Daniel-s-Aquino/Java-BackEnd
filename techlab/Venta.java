@@ -20,7 +20,7 @@ public class Venta {
 
     public double calcularPrecioTotal() {
         if(this.cantidad > 100) {
-            System.out.println("Se generea un -30%");
+            System.out.println("Se genera un -30%");
             return this.producto.getPrecio() * 0.7 * this.cantidad; 
         }
         return this.producto.getPrecio() * this.cantidad;
