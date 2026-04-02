@@ -30,32 +30,64 @@
 public class TechLab {
     public static void main(String[] args) {
 
-        Producto p1 = new Producto("Ruedas de auxilio", 230000);
+        // --- 1. Cargar el inventario de la tienda ---
+        Venta.agregarProducto(new Producto("Ruedas de auxilio", 120000, 176));
+        Venta.agregarProducto(new Producto("Kit de Herramientas", 80000, 200));
+        Venta.agregarProducto(new Producto("Lampara led H4", 72349, 50));
+        Venta.agregarProducto(new Producto("Filtro de Aire K&G", 29820, 700));
+        Venta.agregarProducto(new Producto("Liquido de Frenos PG5l00", 35500, 905));
+        Venta.agregarProducto(new Producto("Bujia Iridium", 18000, 40));
+
+        System.out.println("--- INVENTARIO INICIAL ---");
+        Venta.mostrarCatalogo();
+
+        // --- 2. Ingresar a los clientes ---
         Cliente c1 = new Cliente("Martin P.");
-        Venta v1 = new Venta(c1, p1, 2);
-        System.out.println(v1);
-
-        Producto p2 = new Producto("Kit de Herramientas Pro", 85000);
         Cliente c2 = new Cliente("Sabrina G.");
-        Venta v2 = new Venta(c2, p2, 1);
+        Cliente c3 = new Cliente("Aramis G.");
+        Cliente c4 = new Cliente("Enzo C.");
+        Cliente c5 = new Cliente("Belen A.");
+
+        System.out.println("\n--- PROCESANDO VENTAS ---\n");
+
+        // --- Primera ronda de ventas ---
+        Venta v1 = new Venta(c1, Venta.buscarProducto("Ruedas de auxilio"), 30);
+        Venta v2 = new Venta(c2, Venta.buscarProducto("Kit de Herramientas"), 101);
+        Venta v3 = new Venta(c3, Venta.buscarProducto("Lampara led H4"), 2);
+        Venta v4 = new Venta(c4, Venta.buscarProducto("Filtro de Aire K&G"), 8);
+        Venta v5 = new Venta(c5, Venta.buscarProducto("Liquido de Frenos PG5l00"), 10);
+
+        System.out.println(v1);
         System.out.println(v2);
-
-        Producto p3 = new Producto("Aceite Sintético 5L", 45000);
-        Cliente c3 = new Cliente("Matías L.");
-        Venta v3 = new Venta(c3, p3, 4);
         System.out.println(v3);
-
-        Producto p4 = new Producto("Lámpara LED H4", 12500);
-        Cliente c4 = new Cliente("Ana F.");
-        Venta v4 = new Venta(c4, p4, 2);
         System.out.println(v4);
-        
-        Producto p5 = new Producto("Filtro de Aire K&N", 55000);
-        Venta v5 = new Venta(c1, p5, 1);
         System.out.println(v5);
+        
+        // --- Más ventas para probar la lógica de stock ---
 
-        Producto p6 = new Producto("Lampara Solar", 1230);
-        Venta v6 = new Venta(c2, p6, 101);
+        // Venta 6: Exitosa, un cliente vuelve a comprar
+        Venta v6 = new Venta(c1, Venta.buscarProducto("Bujia Iridium"), 4);
         System.out.println(v6);
+
+        // Venta 7: FALLIDA, se intenta comprar más lámparas de las que hay en stock
+        Venta v7 = new Venta(c3, Venta.buscarProducto("Lampara led H4"), 50); // Solo quedan 48
+        System.out.println(v7);
+
+        // Venta 8: Exitosa, prueba del descuento por comprar más de 100 unidades
+        Venta v8 = new Venta(c4, Venta.buscarProducto("Filtro de Aire K&G"), 120);
+        System.out.println(v8);
+
+        // Venta 9: FALLIDA, el producto no existe en el catálogo
+        Producto p9 = new Producto("Bateria de Gel", 95000, 10);
+        Venta v9 = new Venta(c5, p9, 1); // Este producto nunca se agregó al inventario
+        System.out.println(v9); // Esto funcionará, pero la lógica de stock no es la del inventario central
+
+        // Venta 10: Exitosa, se vende casi todo el stock de un producto
+        Venta v10 = new Venta(c2, Venta.buscarProducto("Bujia Iridium"), 35); // Quedaban 36, ahora quedará 1
+        System.out.println(v10);
+        
+        // --- 3. Revisar el estado final del inventario ---
+        System.out.println("\n--- INVENTARIO FINAL ---");
+        Venta.mostrarCatalogo();
     }
 }
