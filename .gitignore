@@ -27,4 +27,12 @@
 hs_err_pid*
 replay_pid*
 
+# Consigna de la pre-entrega
+consignaPreEntrega/
+# Ejercicios del campus
+techlab/
+# Clases de TalentoTech
+clasesTalentoTech/
+
+
 # End of https://www.toptal.com/developers/gitignore/api/java
