@@ -56,6 +56,7 @@ public abstract class Articulo implements Calculable, Identificable {
         this.categoria = categoria;
     }
 
+    // metodo abstracto de la clase
     public abstract String getTipoArticulo();
 
     @Override
