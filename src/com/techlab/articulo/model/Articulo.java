@@ -5,12 +5,14 @@ import com.techlab.articulo.interfaces.Identificable;
 
 public abstract class Articulo implements Calculable, Identificable {
     private static int contador = 0;
+    
     protected final int codigo;
     protected String nombre;
     protected double precio;
     protected Categoria categoria;
 
-    protected Articulo(){
+    protected Articulo() {
+        this.codigo = ++contador;
     }
 
     protected Articulo(String nombre, double precio, Categoria categoria) {
@@ -24,54 +26,34 @@ public abstract class Articulo implements Calculable, Identificable {
         return contador;
     }
 
-    public static void setContador(int contador) {
-        Articulo.contador = contador;
-    }
-
+    @Override
     public int getCodigo() {
         return codigo;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+
+    public double getPrecio() { return precio; }
+    public void setPrecio(double precio) { 
+        if (precio < 0) throw new IllegalArgumentException("Precio no puede ser negativo");
+        this.precio = precio; 
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public Categoria getCategoria() { return categoria; }
+    public void setCategoria(Categoria categoria) { this.categoria = categoria; }
 
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    // metodo abstracto de la clase
     public abstract String getTipoArticulo();
 
     @Override
     public abstract double calcularPrecioFinal();
-    
-    @Override
-    public abstract int getCodigo();
 
     @Override
     public String toString() {
-        return (
-            "Codigo: " + this.codigo +
-            "Nombre: " + this.nombre +
-            "Precio: " + this.precio +
-            "Categoria: " + this.categoria +
-        );
+        return "Codigo: " + codigo +
+               ", Nombre: " + nombre +
+               ", Precio: $" + precio +
+               ", Categoria: " + (categoria != null ? categoria.getNombre() : "Sin categoria") +
+               ", Tipo: " + getTipoArticulo();
     }
 }

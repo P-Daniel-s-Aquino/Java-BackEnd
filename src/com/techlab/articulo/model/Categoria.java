@@ -13,6 +13,7 @@ public class Categoria implements Identificable {
         this.descripcion = descripcion;
     }
 
+    @Override
     public int getCodigo() {
         return codigo;
     }
@@ -38,16 +39,7 @@ public class Categoria implements Identificable {
     }
 
     @Override
-    public int getCodigo() {
-        // TODO 
-        return 0;
-    }
-
-    @Override
     public String toString() {
-        // TODO
-        return "";
+        return codigo + " - " + nombre + " (" + descripcion + ")";
     }
-
-    
 }
