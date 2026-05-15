@@ -29,7 +29,7 @@ public class ArticuloAlimenticio extends Articulo {
     public double calcularPrecioFinal() {
         double base = getPrecio();
         
-        if (diasParaVencimiento <= 3) {
+        if (diasParaVencimiento <= 3) { 
             return base * 0.70; // 30% off
         }
         if (diasParaVencimiento <= 10) {
@@ -42,6 +42,7 @@ public class ArticuloAlimenticio extends Articulo {
     public String toString() {
         return super.toString() + 
                ", Dias para vencer: " + diasParaVencimiento +
-               ", Precio final: $" + String.format("%.2f", calcularPrecioFinal());
+               ", Precio final: $" + String.format("%.2f", calcularPrecioFinal()
+            );
     }
 }

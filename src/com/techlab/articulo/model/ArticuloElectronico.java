@@ -1,7 +1,7 @@
 package com.techlab.articulo.model;
 
-import com.techlab.articulo.model.Articulo;
-import com.techlab.articulo.model.Categoria;
+// import com.techlab.articulo.model.Articulo;
+// import com.techlab.articulo.model.Categoria;
 
 public class ArticuloElectronico extends Articulo {
 
@@ -45,6 +45,9 @@ public class ArticuloElectronico extends Articulo {
 
     @Override
     public String toString() {
-        return super.toString() + ", Garantia: " + garantiaMeses + " meses, Precio final: $" + String.format("%.2f", calcularPrecioFinal());
+        return super.toString() + 
+                ", Garantia: " + garantiaMeses + 
+                " meses, Precio final: $" + String.format("%.2f", calcularPrecioFinal()
+            );
     }
 }
