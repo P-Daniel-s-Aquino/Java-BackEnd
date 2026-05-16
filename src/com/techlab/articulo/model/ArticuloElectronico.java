@@ -1,8 +1,5 @@
 package com.techlab.articulo.model;
 
-// import com.techlab.articulo.model.Articulo;
-// import com.techlab.articulo.model.Categoria;
-
 public class ArticuloElectronico extends Articulo {
 
     private int garantiaMeses;

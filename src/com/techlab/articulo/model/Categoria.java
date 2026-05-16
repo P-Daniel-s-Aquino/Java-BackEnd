@@ -2,12 +2,17 @@ package com.techlab.articulo.model;
 
 import com.techlab.articulo.interfaces.Identificable;
 
-public class Categoria implements Identificable {
-    private int codigo;
-    private String nombre;
-    private String descripcion;
+public enum Categoria implements Identificable {
+    ELECTRONICA(1, "Electrónica", "Productos tecnológicos y electrónicos"),
+    PERIFERICOS(2, "Periféricos", "Accesorios para computadora"),
+    ALIMENTOS(3, "Alimentos", "Productos alimenticios"),
+    LIMPIEZA(4, "Limpieza", "Artículos de limpieza del hogar");
 
-    public Categoria(int codigo, String nombre, String descripcion) {
+    private final int codigo;
+    private final String nombre;
+    private final String descripcion;
+
+    Categoria(int codigo, String nombre, String descripcion) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -18,28 +23,23 @@ public class Categoria implements Identificable {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
     public String getNombre() {
         return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public String getDescripcion() {
         return descripcion;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public static Categoria buscarPorCodigo(int codigo) {
+        for (Categoria c : values()) {
+            if (c.codigo == codigo) return c;
+        }
+        throw new IllegalArgumentException("Código de categoría inválido: " + codigo);
     }
 
     @Override
     public String toString() {
-        return codigo + " - " + nombre + " (" + descripcion + ")";
+        return codigo + " - " + nombre;
     }
 }
