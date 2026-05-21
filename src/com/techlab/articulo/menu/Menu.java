@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public abstract class Menu {
 
-    protected Scanner scanner;
+    protected Scanner teclado;
 
-    public Menu(Scanner scanner) {
-        this.scanner = scanner;
+    public Menu(Scanner teclado) {
+        this.teclado = teclado;
     }
 
     public abstract void mostrarMenu();
@@ -18,7 +18,7 @@ public abstract class Menu {
     protected int leerEntero(String mensaje) {
         while (true) {
             System.out.print(mensaje + ": ");
-            String input = scanner.nextLine().trim();
+            String input = teclado.nextLine().trim();
             try {
                 return Integer.parseInt(input);
             } catch (NumberFormatException e) {
@@ -30,7 +30,7 @@ public abstract class Menu {
     protected double leerDouble(String mensaje) {
         while (true) {
             System.out.print(mensaje + ": ");
-            String input = scanner.nextLine().trim().replace(",", ".");
+            String input = teclado.nextLine().trim().replace(",", ".");
             try {
                 return Double.parseDouble(input);
             } catch (NumberFormatException e) {
@@ -41,13 +41,13 @@ public abstract class Menu {
 
     protected String leerTexto(String mensaje) {
         System.out.print(mensaje + ": ");
-        return scanner.nextLine().trim();
+        return teclado.nextLine().trim();
     }
 
     protected boolean leerSiNo(String mensaje) {
         while (true) {
             System.out.print(mensaje + " (s/n): ");
-            String input = scanner.nextLine().trim().toLowerCase();
+            String input = teclado.nextLine().trim().toLowerCase();
             if (input.equals("s") || input.equals("si")) {
                 return true;
             }
@@ -60,6 +60,6 @@ public abstract class Menu {
 
     protected void pausar() {
         System.out.println("\nPresione Enter para continuar...");
-        scanner.nextLine();
+        teclado.nextLine();
     }
 }

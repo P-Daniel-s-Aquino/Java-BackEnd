@@ -43,8 +43,8 @@ public class ArticuloElectronico extends Articulo {
     @Override
     public String toString() {
         return super.toString() + 
-                ", Garantia: " + garantiaMeses + 
-                " meses, Precio final: $" + String.format("%.2f", calcularPrecioFinal()
+                "\nGarantia: " + garantiaMeses + 
+                "\nmeses, Precio final: $" + String.format("%.2f", calcularPrecioFinal()
             );
     }
 }

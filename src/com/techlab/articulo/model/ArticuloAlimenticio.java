@@ -41,8 +41,8 @@ public class ArticuloAlimenticio extends Articulo {
     @Override
     public String toString() {
         return super.toString() + 
-               ", Dias para vencer: " + diasParaVencimiento +
-               ", Precio final: $" + String.format("%.2f", calcularPrecioFinal()
+               "\nDias para vencer: " + diasParaVencimiento +
+               "\nPrecio final: $" + String.format("%.2f", calcularPrecioFinal()
             );
     }
 }

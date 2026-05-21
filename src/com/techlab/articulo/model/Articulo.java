@@ -50,10 +50,11 @@ public abstract class Articulo implements Calculable, Identificable {
 
     @Override
     public String toString() {
-        return "Codigo: " + codigo +
-               ", Nombre: " + nombre +
-               ", Precio: $" + precio +
-               ", Categoria: " + (categoria != null ? categoria.getNombre() : "Sin categoria") +
-               ", Tipo: " + getTipoArticulo();
+        return "\n====================== ARTICULO " + codigo + " ======================" +
+               "\nCodigo: " + codigo +
+               "\nNombre: " + nombre +
+               "\nPrecio: $" + precio +
+               "\nCategoria: " + ((categoria != null) ? categoria.getNombre() : "Sin categoria") +
+               "\nTipo: " + getTipoArticulo();
     }
 }

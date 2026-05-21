@@ -6,7 +6,7 @@ public enum Categoria implements Identificable {
     ELECTRONICA(1, "Electrónica", "Productos tecnológicos y electrónicos"),
     PERIFERICOS(2, "Periféricos", "Accesorios para computadora"),
     ALIMENTOS(3, "Alimentos", "Productos alimenticios"),
-    LIMPIEZA(4, "Limpieza", "Artículos de limpieza del hogar");
+    CONGELADOS(4, "Congelados", "Productos alimenticios congelados");
 
     private final int codigo;
     private final String nombre;
