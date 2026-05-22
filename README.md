@@ -105,7 +105,7 @@ Incluye `buscarPorCodigo(int)` que lanza excepción si no existe.
 
 ```
 ======================================================
- SISTEMA DE ARTÍCULOS - CLASE 8 (MENÚS SEPARADOS)
+ SISTEMA DE ARTÍCULOS - (MENÚS SEPARADOS)
 ======================================================
 1 - Menú de artículos
 2 - Menú de categorías
