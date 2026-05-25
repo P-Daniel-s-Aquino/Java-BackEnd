@@ -7,6 +7,7 @@ import com.techlab.articulo.model.Articulo;
 import com.techlab.articulo.model.ArticuloAlimenticio;
 import com.techlab.articulo.model.ArticuloElectronico;
 import com.techlab.articulo.model.Categoria;
+import com.techlab.articulo.model.TipoArticulo;
 import com.techlab.articulo.repository.Repositorio;
 import com.techlab.articulo.utils.Validaciones;
 
@@ -52,10 +53,16 @@ public class MenuArticulos extends Menu {
     }
 
     private void agregarArticulo() {
-        System.out.println("\nTipo: 1-Electrónico  2-Alimenticio");
-        int tipo = leerEntero("Tipo");
-        if (tipo != 1 && tipo != 2) {
-            System.out.println("Tipo inválido");
+        System.out.println("\nTipos disponibles:");
+        for (TipoArticulo tipo : TipoArticulo.values()) {
+            System.out.println(tipo);
+        }
+        int codTipo = leerEntero("Tipo");
+        TipoArticulo tipo;
+        try {
+            tipo = TipoArticulo.buscarPorCodigo(codTipo);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return;
         }
 
@@ -72,20 +79,25 @@ public class MenuArticulos extends Menu {
         }
 
         System.out.println("Categorías disponibles:");
-        for (Categoria c : Categoria.values()) {
-            System.out.println(c.getCodigo() + " - " + c.getNombre());
+        List<Categoria> categoriasFiltradas = Categoria.listarPorTipo(tipo);
+        for (Categoria categoria : categoriasFiltradas) {
+            System.out.println(categoria.getCodigo() + " - " + categoria.getNombre());
         }
         int codCat = leerEntero("Código categoría");
         Categoria categoria;
         try {
             categoria = Categoria.buscarPorCodigo(codCat);
+            if (categoria.getTipo() != tipo) {
+                System.out.println("Esa categoría no pertenece al tipo " + tipo.getNombre());
+                return;
+            }
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return;
         }
 
         Articulo nuevo;
-        if (tipo == 1) {
+        if (tipo == TipoArticulo.ELECTRONICO) {
             int garantia = leerEntero("Garantía en meses");
             while (!Validaciones.validarNoNegativo(garantia)) {
                 System.out.println("Valor inválido");
@@ -111,7 +123,7 @@ public class MenuArticulos extends Menu {
             System.out.println("No hay artículos");
             return;
         }
-        lista.forEach(System.out::println); // for (Articulo a : lista) System.out.println(a);
+        lista.forEach(System.out::println);
     }
 
     private void buscarArticuloPorCodigo() {
@@ -143,10 +155,22 @@ public class MenuArticulos extends Menu {
             if (Validaciones.validarNoNegativo(nuevoPrecio)) articulo.setPrecio(nuevoPrecio);
         }
         if (leerSiNo("¿Cambiar categoría?")) {
-            for (Categoria categoria : Categoria.values()) System.out.println(categoria);
-                int codigoCategoria = leerEntero("Nuevo código categoría");
-            try { articulo.setCategoria(Categoria.buscarPorCodigo(codigoCategoria)); } 
-            catch (Exception e) { System.out.println("Categoría inválida, se mantiene"); }
+            TipoArticulo tipoActual = articulo.getCategoria().getTipo();
+            System.out.println("Categorías disponibles para " + tipoActual.getNombre() + ":");
+            for (Categoria cat : Categoria.listarPorTipo(tipoActual)) {
+                System.out.println(cat);
+            }
+            int codigoCategoria = leerEntero("Nuevo código categoría");
+            try {
+                Categoria nueva = Categoria.buscarPorCodigo(codigoCategoria);
+                if (nueva.getTipo() != tipoActual) {
+                    System.out.println("Categoría inválida para este tipo, se mantiene");
+                } else {
+                    articulo.setCategoria(nueva);
+                }
+            } catch (Exception e) {
+                System.out.println("Categoría inválida, se mantiene");
+            }
         }
 
         if (articulo instanceof ArticuloElectronico ae && leerSiNo("¿Cambiar garantía?")) {
@@ -170,12 +194,9 @@ public class MenuArticulos extends Menu {
         for (Categoria categoria : Categoria.values()) {
             System.out.println(categoria);
         }
-        
         int codigoCategoria = leerEntero("Código categoría");
-        
         try {
             Categoria cat = Categoria.buscarPorCodigo(codigoCategoria);
-            
             for (Articulo articulo : repoArticulos.listar()) {
                 if (articulo.getCategoria() == cat) {
                     System.out.println(articulo);
